@@ -258,6 +258,17 @@ npm install -D prettier-plugin-tailwindcss
 }
 ```
 
+6. Additional npm
+
+```bash
+npm install -D classnames
+```
+
+7. husky setup
+
+- Refer https://github.com/hikarucraft/nextjs-template-css-modules-storybook
+
+
 ## Refs.
 - https://zenn.dev/resistance_gowy/articles/91b4f62b9f48ec
 - https://zenn.dev/rena_h/scraps/fd330154d02f76
