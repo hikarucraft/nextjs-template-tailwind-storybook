@@ -220,7 +220,47 @@ out/
   }
 }
 ```
+5. add prettier plugin tailwindcss
 
+```bash
+npm install -D prettier-plugin-tailwindcss
+```
+
+- `.prettierrc.json`
+
+```json
+{
+  "plugins": ["prettier-plugin-tailwindcss"], //<-add
+ //...
+}
+```
+
+- `.vscode/extentions.json`
+
+```json
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss" //<- add
+    //...
+  ]
+}
+```
+
+- `.vscode/settings.json`
+
+```json
+{
+  //...
+  //↓ add
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}
+```
+
+## Refs.
+- https://zenn.dev/resistance_gowy/articles/91b4f62b9f48ec
+- https://zenn.dev/rena_h/scraps/fd330154d02f76
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
