@@ -1,3 +1,228 @@
+# Next.js + TypeScript + TailwindCSS + Storybook
+
+## Setup Process
+1. Initialize nextjs project
+
+```bash
+npx create-next-app@latest
+```
+
+2. Add Storybook
+
+```bash
+npx storybook@latest init
+```
+
+3. Add Prettier
+
+```bash
+npm install -D prettier eslint-config-prettier
+touch .prettierrc.json .prettierignore
+```
+- `.eslintrc.json`
+
+```json
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:storybook/recommended",
+    "prettier" //<- add
+  ]
+}
+```
+
+- `.prettierrc.json`
+
+```json
+{
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 90,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "jsxSingleQuote": true
+}
+```
+
+- `.prettierignore`
+
+```
+# Ignore artifacts:
+package.json
+package-lock.json
+build
+coverage
+yarn.lock
+
+# dotfile
+.env*
+
+# markdown
+*.md
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# yarn
+/.yarn/
+```
+
+- `.vscode/settings.json`
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+```
+
+- `.vscode/extentions.json`
+
+```json
+{
+  "recommendations": [
+    "esbenp.prettier-vscode" //<- add
+  ]
+}
+```
+
+- `package.json`
+
+```json
+{
+    "scripts":{
+        //...
+        "format": "prettier --write ." //<- add
+        //...
+    }
+}
+```
+
+4. configure eslint
+
+```bash
+npm install -D eslint-plugin-import @typescript-eslint/parser @typescript-eslint/eslint-plugin
+touch .eslintignore src/stories/eslintrc.json
+```
+
+- .eslintignore
+
+```
+# config
+.eslintrc.js
+prettier.config.js
+next.config.js
+tailwind.config.js
+tsconfig.json
+postcss.config.js
+
+# build dir
+build/
+bin/
+obj/
+out/
+.next/
+```
+
+- .eslintrc.json
+
+```json
+{
+  "extends": [
+    "eslint:recommended", //<-add
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended", //<-add
+    "plugin:@typescript-eslint/recommended-requiring-type-checking", //<-add
+    "plugin:storybook/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser", //<-add
+  "parserOptions": {
+    "project": "./tsconfig.json" //<-add
+  },
+  "plugins": ["@typescript-eslint"], //<-add
+  "root": true,
+  //↓ add "rules": {...}
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "parent", "sibling", "index", "object", "type"],
+        "pathGroups": [
+          {
+            "pattern": "{react,react-dom/**,react-router-dom}",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "@src/**",
+            "group": "parent",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc"
+        },
+        "newlines-between": "always"
+      }
+    ],
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }]
+  }
+}
+```
+
+- `src/stories/eslintrc.json`
+
+```json
+{
+  "rules": {
+    "@typescript-eslint/no-unsafe-call": "off"
+  }
+}
+```
+
+- `.vscode/extentions.json`
+
+```json
+{
+  "recommendations": [
+    "esbenp.prettier-vscode", 
+    "dbaeumer.vscode-eslint" //<- add
+  ]
+}
+
+```
+
+- `.vscode/settings.json`
+
+```json
+{
+  //...
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit" //<-add
+  },
+  //...
+}
+```
+- `package.json`
+
+```json
+{
+  "scripts":{
+    //...
+    "lint:fix": "eslint src --ext .js,jsx,.ts,.tsx --fix", //<- add
+    //...
+  }
+}
+```
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
